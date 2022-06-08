@@ -5,7 +5,6 @@
 using namespace std;
 
 int main() {
-
     system("Color 0A");
 
     cout << "\n\t\t\t\t\t---------------------------------------------------------" << endl;
@@ -28,7 +27,6 @@ int main() {
     string user_name, user_password, user_confirm_password;
 
     switch (option_chosen) {
-
         case 1:
 
             cout << "\n\t\t\t\t\t---------------------------------------------------" << endl;
@@ -56,7 +54,6 @@ int main() {
             }
 
             while (file) {
-
                 cout << "\n\t\t\t\t\tEnter a password: ";
 
                 cin >> user_password;
