@@ -43,13 +43,14 @@ int main() {
 
             if (fin) {
                 system("Color 04");
-                cout << "\n\t\t\t\t\tFile name already exists";
+                cout << "\n\t\t\t\t\tUser with name '"+user_name+"' already exists!!\n\n";
                 exit(0);
             }
 
             file.open(user_name + ".txt", ios::out);
 
             if (!file) {
+                system("Color 04");
                 cout << "\n\t\t\t\t\tAn error occurred. Please try again later!!";
                 return 0;
             }
@@ -60,11 +61,11 @@ int main() {
 
                 cin >> user_password;
 
-                cout << "n\t\t\t\t\tConfirm your password: ";
+                cout << "\n\t\t\t\t\tConfirm your password: ";
 
                 cin >> user_confirm_password;
 
-                cout << "\n\t\t\t\t\tYou've successfully registered as a user!!\n";
+                cout << "\n\t\t\t\t\tYou've Successfully registered as a user!!\n\n";
 
                 if (user_password != user_confirm_password)
                     cout << "\n\t\t\t\t\tYour both the passwords don't match. Try again!!" << endl;
@@ -92,7 +93,8 @@ int main() {
             fin.open(user_name + ".txt");
 
             if (!fin) {
-                cout << "\n\t\t\t\t\tThere's no user with the username " + user_name + " in the database" << endl;
+                system("Color 04");
+                cout << "\n\t\t\t\t\tThere's no user with the username '" + user_name + "' in the database\n\n";
                 exit(0);
             }
 
@@ -108,16 +110,17 @@ int main() {
             fin.close();
 
             if (user_password != user_confirm_password) {
-                cout << "\n\t\t\t\t\tYour password was incorrect. Try again!!\n";
+                system("Color 04");
+                cout << "\n\t\t\t\t\tYour password was incorrect. Try again!!\n\n";
             } else {
-                cout << "\t\t\t\t\tYou've successfully logged in !!" << endl;
+                cout << "\n\t\t\t\t\tYou've successfully logged in !!\n\n";
             }
 
             break;
 
         default:
             system("Color 04");
-            cout << "\n\t\t\t\t\tPlease try again later !!";
+            cout << "\n\t\t\t\t\tPlease try again later !!\n\n";
             break;
     }
 
