@@ -27,8 +27,6 @@ int main() {
 
     string user_name, user_password, user_confirm_password;
 
-    int file_deletion_status;
-
     hash<string> hash_string;
 
     switch (option_chosen) {
