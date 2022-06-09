@@ -32,7 +32,6 @@ int main() {
     hash<string> hash_string;
 
     switch (option_chosen) {
-
     case 1:
 
         cout << "\n\t\t\t\t\t---------------------------------------------------" << endl;
