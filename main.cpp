@@ -5,9 +5,7 @@
 
 using namespace std;
 
-int main()
-{
-
+int main() {
     system("Color 0A");
 
     cout << "\n\t\t\t\t\t---------------------------------------------------------" << endl;
@@ -33,9 +31,7 @@ int main()
 
     hash<string> hash_string;
 
-    switch (option_chosen)
-    {
-
+    switch (option_chosen) {
     case 1:
 
         cout << "\n\t\t\t\t\t---------------------------------------------------" << endl;
@@ -64,9 +60,7 @@ int main()
             return 0;
         }
 
-        while (file)
-        {
-
+        while (file) {
             cout << "\n\t\t\t\t\tEnter a password: ";
 
             cin >> user_password;
