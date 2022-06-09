@@ -27,7 +27,7 @@ int main() {
 
     string user_name, user_password, user_confirm_password;
 
-    int file_deletion_status;
+    //int file_deletion_status;
 
     hash<string> hash_string;
 
@@ -68,22 +68,10 @@ int main() {
             cout << "\n\t\t\t\t\tConfirm your password: ";
             cin >> user_confirm_password;
 
-            if (user_password != user_confirm_password)
-            {
+            if (user_password != user_confirm_password) {
                 cout << "\n\t\t\t\t\tYour both the passwords don't match. Try again!!\n\n";
-
                 file.close();
-                try
-                {
-                    if (filesystem::remove(user_name + ".txt"))
-                        file_deletion_status = 0;
-                    else
-                        file_deletion_status = -1;
-                }
-                catch (const filesystem::filesystem_error &err)
-                {
-                    std::cout << "filesystem error: " << err.what() << '\n';
-                }
+                filesystem::remove(user_name + ".txt"))
                 exit(0);
             }
             else
