@@ -1,10 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <filesystem>
 
 using namespace std;
 
-int main() {
+int main()
+{
+
     system("Color 0A");
 
     cout << "\n\t\t\t\t\t---------------------------------------------------------" << endl;
@@ -26,99 +29,129 @@ int main() {
 
     string user_name, user_password, user_confirm_password;
 
-    switch (option_chosen) {
-        case 1:
+    int file_deletion_status;
 
-            cout << "\n\t\t\t\t\t---------------------------------------------------" << endl;
-            cout << "\t\t\t\t\t|\t\tRegistration\tProcess\t\t  |" << endl;
-            cout << "\t\t\t\t\t---------------------------------------------------" << endl;
+    hash<string> hash_string;
 
-            cout << "\n\t\t\t\t\tEnter your username: ";
+    switch (option_chosen)
+    {
 
-            cin >> user_name;
+    case 1:
 
-            fin.open(user_name + ".txt");
+        cout << "\n\t\t\t\t\t---------------------------------------------------" << endl;
+        cout << "\t\t\t\t\t|\t\tRegistration\tProcess\t\t  |" << endl;
+        cout << "\t\t\t\t\t---------------------------------------------------" << endl;
 
-            if (fin) {
-                system("Color 04");
-                cout << "\n\t\t\t\t\tUser with name '"+user_name+"' already exists!!\n\n";
-                exit(0);
-            }
+        cout << "\n\t\t\t\t\tEnter your username: ";
 
-            file.open(user_name + ".txt", ios::out);
+        cin >> user_name;
 
-            if (!file) {
-                system("Color 04");
-                cout << "\n\t\t\t\t\tAn error occurred. Please try again later!!";
-                return 0;
-            }
+        fin.open(user_name + ".txt");
 
-            while (file) {
-                cout << "\n\t\t\t\t\tEnter a password: ";
+        if (fin)
+        {
+            system("Color 04");
+            cout << "\n\t\t\t\t\tUser with name '" + user_name + "' already exists!!\n\n";
+            exit(0);
+        }
 
-                cin >> user_password;
+        file.open(user_name + ".txt", ios::out);
 
-                cout << "\n\t\t\t\t\tConfirm your password: ";
+        if (!file)
+        {
+            system("Color 04");
+            cout << "\n\t\t\t\t\tAn error occurred. Please try again later!!";
+            return 0;
+        }
 
-                cin >> user_confirm_password;
+        while (file)
+        {
 
-                cout << "\n\t\t\t\t\tYou've Successfully registered as a user!!\n\n";
+            cout << "\n\t\t\t\t\tEnter a password: ";
 
-                if (user_password != user_confirm_password)
-                    cout << "\n\t\t\t\t\tYour both the passwords don't match. Try again!!" << endl;
+            cin >> user_password;
 
-                else
-                    file << user_password;
-
-                break;
-            }
-
-            file.close();
-
-            break;
-
-        case 2:
-
-            cout << "\n\t\t\t\t\t---------------------------------------------" << endl;
-            cout << "\t\t\t\t\t|\t\tLogin Process\t\t    |" << endl;
-            cout << "\t\t\t\t\t---------------------------------------------" << endl;
-
-            cout << "\n\t\t\t\t\tEnter your username: ";
-
-            cin >> user_name;
-
-            fin.open(user_name + ".txt");
-
-            if (!fin) {
-                system("Color 04");
-                cout << "\n\t\t\t\t\tThere's no user with the username '" + user_name + "' in the database\n\n";
-                exit(0);
-            }
-
-            cout << "\n\t\t\t\t\tEnter your password: ";
-
+            cout << "\n\t\t\t\t\tConfirm your password: ";
             cin >> user_confirm_password;
 
-            while (fin) {
-                getline(fin, user_password);
-                break;
+            if (user_password != user_confirm_password)
+            {
+                cout << "\n\t\t\t\t\tYour both the passwords don't match. Try again!!\n\n";
+
+                file.close();
+                try
+                {
+                    if (filesystem::remove(user_name + ".txt"))
+                        file_deletion_status = 0;
+                    else
+                        file_deletion_status = -1;
+                }
+                catch (const filesystem::filesystem_error &err)
+                {
+                    std::cout << "filesystem error: " << err.what() << '\n';
+                }
+                exit(0);
             }
-
-            fin.close();
-
-            if (user_password != user_confirm_password) {
-                system("Color 04");
-                cout << "\n\t\t\t\t\tYour password was incorrect. Try again!!\n\n";
-            } else {
-                cout << "\n\t\t\t\t\tYou've successfully logged in !!\n\n";
+            else
+            {
+                file << hash_string(user_password);
+                cout << "\n\t\t\t\t\tYou've Successfully registered as a user!!\n\n";
             }
 
             break;
+        }
 
-        default:
+        file.close();
+
+        break;
+
+    case 2:
+
+        cout << "\n\t\t\t\t\t---------------------------------------------" << endl;
+        cout << "\t\t\t\t\t|\t\tLogin Process\t\t    |" << endl;
+        cout << "\t\t\t\t\t---------------------------------------------" << endl;
+
+        cout << "\n\t\t\t\t\tEnter your username: ";
+
+        cin >> user_name;
+
+        fin.open(user_name + ".txt");
+
+        if (!fin)
+        {
             system("Color 04");
-            cout << "\n\t\t\t\t\tPlease try again later !!\n\n";
+            cout << "\n\t\t\t\t\tThere's no user with the username '" + user_name + "' in the database\n\n";
+            exit(0);
+        }
+
+        cout << "\n\t\t\t\t\tEnter your password: ";
+
+        cin >> user_confirm_password;
+
+        while (fin)
+        {
+            getline(fin, user_password);
             break;
+        }
+
+        fin.close();
+
+        if (hash_string(user_password) != hash_string(user_confirm_password))
+        {
+            system("Color 04");
+            cout << "\n\t\t\t\t\tYour password was incorrect. Try again!!\n\n";
+        }
+        else
+        {
+            cout << "\n\t\t\t\t\tYou've successfully logged in !!\n\n";
+        }
+
+        break;
+
+    default:
+        system("Color 04");
+        cout << "\n\t\t\t\t\tPlease try again later !!\n\n";
+        break;
     }
 
     return 0;
