@@ -27,11 +27,12 @@ int main() {
 
     string user_name, user_password, user_confirm_password;
 
-    //int file_deletion_status;
+    int file_deletion_status;
 
     hash<string> hash_string;
 
     switch (option_chosen) {
+
     case 1:
 
         cout << "\n\t\t\t\t\t---------------------------------------------------" << endl;
@@ -44,8 +45,7 @@ int main() {
 
         fin.open(user_name + ".txt");
 
-        if (fin)
-        {
+        if (fin) {
             system("Color 04");
             cout << "\n\t\t\t\t\tUser with name '" + user_name + "' already exists!!\n\n";
             exit(0);
@@ -53,8 +53,7 @@ int main() {
 
         file.open(user_name + ".txt", ios::out);
 
-        if (!file)
-        {
+        if (!file) {
             system("Color 04");
             cout << "\n\t\t\t\t\tAn error occurred. Please try again later!!";
             return 0;
@@ -69,13 +68,12 @@ int main() {
             cin >> user_confirm_password;
 
             if (user_password != user_confirm_password) {
+                system("Color 04");
                 cout << "\n\t\t\t\t\tYour both the passwords don't match. Try again!!\n\n";
                 file.close();
-                filesystem::remove(user_name + ".txt"))
+                filesystem::remove(user_name + ".txt");
                 exit(0);
-            }
-            else
-            {
+            } else {
                 file << hash_string(user_password);
                 cout << "\n\t\t\t\t\tYou've Successfully registered as a user!!\n\n";
             }
@@ -99,8 +97,7 @@ int main() {
 
         fin.open(user_name + ".txt");
 
-        if (!fin)
-        {
+        if (!fin) {
             system("Color 04");
             cout << "\n\t\t\t\t\tThere's no user with the username '" + user_name + "' in the database\n\n";
             exit(0);
@@ -110,21 +107,17 @@ int main() {
 
         cin >> user_confirm_password;
 
-        while (fin)
-        {
+        while (fin) {
             getline(fin, user_password);
             break;
         }
 
         fin.close();
 
-        if (hash_string(user_password) != hash_string(user_confirm_password))
-        {
+        if (hash_string(user_password) != hash_string(user_confirm_password)) {
             system("Color 04");
             cout << "\n\t\t\t\t\tYour password was incorrect. Try again!!\n\n";
-        }
-        else
-        {
+        } else {
             cout << "\n\t\t\t\t\tYou've successfully logged in !!\n\n";
         }
 
