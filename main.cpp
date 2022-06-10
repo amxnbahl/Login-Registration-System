@@ -6,11 +6,11 @@
 int main() {
 	std::system("Color 0A");
 
-	std::cout << "\n\t\t\t\t\t-------------------------------------------\n";
-	std::cout << "\t\t\t\t\t|\tLogin & Registration System\t  |\n";
-	std::cout << "\t\t\t\t\t-------------------------------------------\n";
+	std::cout << "\n\t\t\t\t\t---------------------------------------------";
+	std::cout << "\n\t\t\t\t\t|\tLogin and Registration System\t    |";
+	std::cout << "\n\t\t\t\t\t---------------------------------------------";
 
-	std::cout << "\n\t\t\t\t\tDo you want to Register ? : [1]\n";
+	std::cout << "\n\n\t\t\t\t\tDo you want to Register ? : [1]\n";
 	std::cout << "\n\t\t\t\t\tor do you want to Login ? : [2]\n";
 
 	std::cout << "\n\t\t\t\t\tYour choice : ";
